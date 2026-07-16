@@ -111,7 +111,7 @@
 
   .shot{position:relative}
   .shot .frame{position:absolute;inset:0;transform:translate(11px,11px);border:1px solid var(--signal-lit);border-radius:var(--r);opacity:.55;pointer-events:none}
-  .shot img{width:100%;display:block;border-radius:var(--r);border:1px solid rgba(255,255,255,.16);filter:saturate(.94) contrast(1.03)}
+  .shot img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 22%;display:block;border-radius:var(--r);border:1px solid rgba(255,255,255,.16);filter:saturate(.94) contrast(1.03)}
 
   /* readout strip = signature */
   .readout{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.022)}

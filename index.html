@@ -609,6 +609,23 @@
 
     toggleBtn.addEventListener('click', () => panel.classList.toggle('on'));
 
+    // Tutup panel otomatis kalau klik di luar widget, tekan Escape, atau
+    // benar-benar scroll halaman. Sengaja pakai wheel/touchmove (bukan event
+    // 'scroll') + cek asal event, supaya scroll di DALAM panel dan munculnya
+    // keyboard HP tidak dianggap "klik di luar" dan tidak menutup panel.
+    function isOutsideWidget(target) {
+      return !panel.contains(target) && !toggleBtn.contains(target);
+    }
+    function closeIfOutside(e) {
+      if (panel.classList.contains('on') && isOutsideWidget(e.target)) {
+        panel.classList.remove('on');
+      }
+    }
+    document.addEventListener('mousedown', closeIfOutside);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') panel.classList.remove('on'); });
+    window.addEventListener('wheel', closeIfOutside, { passive: true });
+    window.addEventListener('touchmove', closeIfOutside, { passive: true });
+
     function addMsg(role, text) {
       const div = document.createElement('div');
       div.className = 'entai-msg ' + (role === 'user' ? 'user' : 'bot');
